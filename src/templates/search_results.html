@@ -40,27 +40,13 @@
             </div>
         </header>
 
+
         <!-- Page content-->
         <div class="container">
             <div class="row">
 
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-
-                    <!-- Featured blog post-->
-                    {% for obj in obj_list %}
-                    <div class="card mb-4">
-                        <a href="{{ obj.get_absolute_url }}">
-                            <img class="card-img-top" src="{{ obj.thumbnail.url }}" alt="slika" />
-                        </a>
-                        <div class="card-body">
-                            <div class="small text-muted">Pre {{ obj.timestamp | timesince }}</div>
-                            <h2 class="card-title">{{ obj.title }}</h2>
-                            <p class="card-text">{{ obj.content | safe }}</p>
-                            <a class="btn btn-primary" href="{{ obj.get_absolute_url }}">Procitaj vise →</a>
-                        </div>
-                    </div>
-                    {% endfor %}
 
 
                     <!-- Nested row for non-featured blog posts-->
@@ -73,7 +59,7 @@
                                 <div class="card-body">
                                     <div class="small text-muted">Pre {{ all.timestamp | timesince }}</div>
                                     <h2 class="card-title h4">{{ all.title }}</h2>
-                                    <p class="card-text">{{ all.content | truncatewords:3 | safe }}</p>
+                                    <p class="card-text">{{ all.content | safe  }}</p>
                                     <a class="btn btn-primary" href="{{ all.get_absolute_url }}">Procitaj vise →</a>
                                 </div>
                             </div>
@@ -98,22 +84,6 @@
                         </ul>
                     </nav>
 
-                    {% if is_paginated %}
-
-                    <nav aria-label="Pagination">
-                      <ul class="pagination pagination-template d-flex justify-content-center">
-                        {% if page_obj.has_previous %}
-                        <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
-                        {% endif %}
-                        <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.number }}" class="page-link active">{{ page_obj.number }}</a></li>
-                        {% if page_obj.has_next %}
-                        <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
-                        {% endif %}
-                      </ul>
-                    </nav>
-
-                    {% endif %}
-
 
                 </div>
 
@@ -123,12 +93,10 @@
                     <div class="card mb-4">
                         <div class="card-header">Search</div>
                         <div class="card-body">
-                            <form action="{% url 'search' %}">
-                                <div class="input-group">
-                                    <input class="form-control" name="q" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                    <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
-                                </div>
-                            </form>
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
                         </div>
                     </div>
 
@@ -145,7 +113,13 @@
                                     {% endfor %}
                                     </ul>
                                 </div>
-
+<!--                                <div class="col-sm-6">-->
+<!--                                    <ul class="list-unstyled mb-0">-->
+<!--                                        <li><a href="#!">JavaScript</a></li>-->
+<!--                                        <li><a href="#!">CSS</a></li>-->
+<!--                                        <li><a href="#!">Tutorials</a></li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -164,7 +138,7 @@
                                 <div class="col-md-8">
                                   <div class="card-body">
                                     <h5 class="card-title">{{ late.title }}</h5>
-                                    <p class="card-text">{{ late.overview }}</p>
+                                    <p class="card-text">{{ late.content }}</p>
                                     <p class="card-text"><small class="text-body-secondary">Pre {{ late.timestamp | timesince }}</small></p>
                                       <a class="btn btn-primary btn-sm" href="{{ late.get_absolute_url }}">Procitaj vise →</a>
                                   </div>

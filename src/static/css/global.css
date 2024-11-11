@@ -1,0 +1,23 @@
+
+body {
+
+}
+
+.mreza {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 15px;
+    row-gap: 15px;
+}
+
+@media  (max-width: 765px) {
+    .mreza {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 490px) {
+    .mreza {
+        grid-template-columns: 1fr; /* 1 kolona na mobilnim ekranima */
+    }
+}
